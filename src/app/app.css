@@ -1,0 +1,28 @@
+nav a{
+	color: black;
+	background: lightgrey;
+	padding: 10px;
+	border: 1px solid black;
+}
+
+nav a:visited{
+	color: black;
+}
+nav a:hover{
+	background: white;
+}
+
+nav a.app__link-selected{
+	background: white;
+	border-bottom: none;
+}
+
+main{
+	margin-top: 8px;
+	border: 1px solid black;
+	padding: 10px;
+}
+
+footer{
+	margin-top: 10px;
+}

@@ -1,0 +1,30 @@
+<p>Willkommen im Angular 2 Tutorial für Komponenten</p>
+<div class="component__nav">
+   <ul>
+		<li>
+			<a [routerLink]="['/component/step1']" [routerLinkActive]="['component__link-selected']" #firstLink>
+		    Schritt 1
+		  	</a>
+	  	</li>
+	  	<li>
+			<a [routerLink]="['/component/step2']" [routerLinkActive]="['component__link-selected']">
+			Schritt 2
+			</a>
+	  	</li> 
+	  	<li>
+			<a [routerLink]="['/component/step3']" [routerLinkActive]="['component__link-selected']">
+			Schritt 3
+			</a>
+	  	</li>
+
+	  	<li>
+			<a [routerLink]="['/component/step4']" [routerLinkActive]="['component__link-selected']">
+			Schritt 4
+			</a>
+	  	</li>
+  </ul>
+</div>
+<div class="component__content">
+	<router-outlet></router-outlet>
+</div>
+
