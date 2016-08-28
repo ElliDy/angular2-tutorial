@@ -5,6 +5,6 @@
 	<li *ngFor="let todo of todos; let i = index">
 		<input [(ngModel)]="checkbox['number'+i]" type="checkbox"/>
 		<span [ngClass]="{checked:checkbox['number'+i]}">{{todo}}</span>
-		<button (click)="deleteTodo(i)">x</button>
+		<button class="step3__delete-btn" (click)="deleteTodo(i)">x</button>
 	</li>
 </ul>

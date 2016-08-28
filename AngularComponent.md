@@ -4,6 +4,8 @@ Es wird schrittweise erläutert, wie eine Component in Angular 2 funktioniert. D
 
 * [Schritt 1](https://github.com/ElliDy/angular2-tutorial/blob/master/AngularComponent.md#schritt-1-eine-komponente-die-alle-todos-anzeigt)
 * [Schritt 2](https://github.com/ElliDy/angular2-tutorial/blob/master/AngularComponent.md#schritt-2-erzeugen-eines-todo-eintrags)
+* [Schritt 3](https://github.com/ElliDy/angular2-tutorial/blob/master/AngularComponent.md#schritt-3-löschen-eines-todo-eintrags)
+* [Schritt 4](https://github.com/ElliDy/angular2-tutorial/blob/master/AngularComponent.md#schritt-4-markieren-eines-todo-eintrags-als-erledigt)
 
 Um einen sinnvollen Kontext zu haben, wollen wir eine Todo-App erstellen.
 
