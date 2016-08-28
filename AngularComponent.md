@@ -2,6 +2,9 @@
 
 Es wird schrittweise erläutert, wie eine Component in Angular 2 funktioniert. Die Schritte sind in der Anwendung abgebildet. Den Code dazu findet man unter src/app/stepX. 
 
+* [Schritt 1](https://github.com/ElliDy/angular2-tutorial/blob/master/AngularComponent.md#schritt-1-eine-komponente-die-alle-todos-anzeigt)
+* [Schritt 2](https://github.com/ElliDy/angular2-tutorial/blob/master/AngularComponent.md#schritt-2-erzeugen-eines-todo-eintrags)
+
 Um einen sinnvollen Kontext zu haben, wollen wir eine Todo-App erstellen.
 
 ## Schritt 1: Eine Komponente, die alle Todos anzeigt
@@ -123,6 +126,42 @@ addTodo(value){
 }
 ```
 
-## Schritt 3
+## Schritt 3: Löschen eines Todo-Eintrags
 
-## Schritt 4
+Nun wollen wir allen Todo-Einträgen einen Button hinzufügen, der sie löscht. Hierfür benötigen wir den index vom Todo-Array, um zu wissen welchen Eintrag wir löschen sollen. Dieser wird einer Variablen zugewiesen und im click-Eventhandler "deleteTodo" übergeben.
+
+```html
+<ul>
+	<li *ngFor="let todo of todos; let i = index">
+		<span>{{todo}}</span>
+		<button (click)="deleteTodo(i)">x</button>
+	</li>
+</ul>
+```
+
+Dieser Eventhandler muss innerhalb der Komponente definiert werden.
+
+```typescript
+deleteTodo(index){
+	this.todoService.deleteTodo(index);
+}
+```
+
+Innerhalb der Methode wird wieder der Todo-Service aufgerufen. In dem wird dann das Element mit der Slice-Methode aus dem Array entfernt.
+
+
+## Schritt 4: Markieren eines Todo-Eintrags als erledigt
+
+Dieser Schritt kann komplett innerhalb der HTML-Datei ausgeführt werden. Hierbei wird nicht berücksichtigt, dass das ganze zusätzlich persistent auf einem Server gehalten werden wird. Will man dies erreichen, müsste man aus den Todos Objekte erzeugen, die dann die Eigenschaft "done" besitzen würden. Von der checkbox müsste dann genau diese Eigenschaft pro Eintrag weitergereicht werden.
+
+Wir machen es uns aber einfach und verändern nur das Styling des Eintrags, wenn die Checkbox abgehakt ist. Hierzu verwenden wir zum einen ngModel, um den Wert der Checkbox an eine Variable zu binden. Da wir pro Eintrag einen Wert hinzufügen, wird dafür in der Komponente ein Objekt angelegt, was dann eine mit dem Index verbunden Eigenschaft "numberX" erhält, wo der Wert gespeichert wird. An den span, wo der Text des Eintrags, wird ein ngClass definiert, welches die Klasse "checked" hinzufügt, sobald die Checkbox abgehakt ist. 
+
+```typescript
+<ul>
+	<li *ngFor="let todo of todos; let i = index">
+		<input [(ngModel)]="checkbox['number'+i]" type="checkbox"/>
+		<span [ngClass]="{checked:checkbox['number'+i]}">{{todo}}</span>
+		<button (click)="deleteTodo(i)">x</button>
+	</li>
+</ul>
+```
