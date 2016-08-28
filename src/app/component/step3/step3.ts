@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild, ElementRef} from '@angular/core';
 import {TodoService} from './todoService';
 @Component({
   selector: 'step3',
@@ -8,6 +8,7 @@ import {TodoService} from './todoService';
 })
 export class Step3 {
 	todos:String[];
+	@ViewChild('addInput') addInput: ElementRef;
 
 	constructor(private todoService:TodoService){
 		this.todos = this.todoService.getTodos();
@@ -15,6 +16,13 @@ export class Step3 {
 
 	addTodo(value){
 		this.todoService.addTodo(value);
+	}
+
+	keypressed(event, value){
+		if(event.keyCode===13){
+			this.addTodo(value);
+			this.addInput.nativeElement.value = '';
+		}
 	}
 
 	deleteTodo(index){

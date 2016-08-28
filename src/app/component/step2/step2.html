@@ -1,5 +1,5 @@
 <h3>Todos</h3>
-<input type="text" #addInput/>
+<input type="text" #addInput  (keypress)="keypressed($event, addInput.value)"/>
 <button (click)="addTodo(addInput.value)">Hinzufügen</button>
 <ul>
 	<li *ngFor="let todo of todos">{{todo}}</li>
