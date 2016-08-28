@@ -77,7 +77,51 @@ Nun müssen wir nur noch über den Service die Todos holen und sie dem Array an 
 </ul>
 ```
 
-## Schritt 2
+## Schritt 2: Erzeugen eines Todo-Eintrags
+
+Im Folgenden wollen wir nun ein Todo-Eintrag erstellen. Hierzu fügen wir im Template ein Input-Feld und einen Button hinzu. Das Input-Feld wird als Referenzvariable "#addInput" hinzugefügt. Diese brauchen wir, weil wir beim Klicken des Buttons und auch wenn der Nutzer Enter drückt, den Wert des Input-Feldes übergeben müssen. Die beiden Eventhandler werden mit geschweiften Klammern hinzugefügt. Für das keypress-Event benötigen wir noch als Übergabeparameter das Event, um dann in der Methode herauszufinden, ob Enter gedrückt wurde.  
+
+```html
+<h3>Todos</h3>
+<input type="text" #addInput  (keypress)="keypressed($event, addInput.value)"/>
+<button (click)="addTodo(addInput.value)">Hinzufügen</button>
+<ul>
+	<li *ngFor="let todo of todos">{{todo}}</li>
+</ul>
+```
+
+In der Komponente werden zwei Methoden hinzugefügt: "keypressed" und "addTodo". Erstere ruft "addTodo" auf, wenn der Event-Code dem von Enter entspricht. Weiterhin wird hier noch das input-Feld gelehrt. Hierzu wird mit der Annotation ViewChild eine Elemenet-Referenz erzeugt, die dann in der Methode genutzt werden kann.
+
+```typescript
+export class Step2 {
+	todos:String[];
+
+	@ViewChild('addInput') addInput: ElementRef;
+
+	constructor(private todoService:TodoService){
+		this.todos = this.todoService.getTodos();
+	}
+
+	addTodo(value){
+		this.todoService.addTodo(value);
+	}
+
+	keypressed(event, value){
+		if(event.keyCode===13){
+			this.addTodo(value);
+			this.addInput.nativeElement.value = '';
+		}
+	}
+}
+```
+
+"addTodo" selber ruft die Methode addTodo vom Todoservice auf. In diesem wird dem Array der Wert aus dem Input-Feld hinzugefügt.
+
+```typescript
+addTodo(value){
+	this.todos.push(value);
+}
+```
 
 ## Schritt 3
 
