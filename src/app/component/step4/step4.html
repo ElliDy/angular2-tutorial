@@ -3,8 +3,8 @@
 <button (click)="addTodo(addInput.value)">Hinzufügen</button>
 <ul>
 	<li *ngFor="let todo of todos; let i = index">
-		<input [(ngModel)]="checkbox['number'+i]" type="checkbox"/>
-		<span [ngClass]="{checked:checkbox['number'+i]}">{{todo}}</span>
+		<input [(ngModel)]="checkbox[i]" type="checkbox"/>
+		<span [ngClass]="{checked:checkbox[i]}">{{todo}}</span>
 		<button class="step3__delete-btn" (click)="deleteTodo(i)">x</button>
 	</li>
 </ul>

@@ -9,10 +9,10 @@ import {TodoService} from './todoService';
 export class Step4 {
 	todos:String[];
 	@ViewChild('addInput') addInput: ElementRef;
-	checkbox;
+	checkbox:boolean[];
 
 	constructor(private todoService:TodoService){
-		this.checkbox = {};
+		this.checkbox = [];
 		this.todos = this.todoService.getTodos();
 	}
 
@@ -28,6 +28,7 @@ export class Step4 {
 	}
 
 	deleteTodo(index){
+		this.checkbox.splice(index, 1);
 		this.todoService.deleteTodo(index);
 	}
 }

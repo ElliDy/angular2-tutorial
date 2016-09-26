@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {TodoService} from './todoService';
+
 @Component({
   selector: 'step1',
   styleUrls: ['./step1.css'],
