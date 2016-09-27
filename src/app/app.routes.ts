@@ -3,6 +3,7 @@ import {Step1} from './component/step1/step1';
 import {Step2} from './component/step2/step2';
 import {Step3} from './component/step3/step3';
 import {Step4} from './component/step4/step4';
+import {Step5} from './component/step5/step5';
 import {ComponentTutorial} from './component/componentTutorial';
 import {Home} from './home/home';
 
@@ -16,6 +17,7 @@ export const rootRouterConfig: Routes = [
       {path: 'step2', component: Step2},
       {path: 'step3', component: Step3},
       {path: 'step4', component: Step4},
+      {path: 'step5', component: Step5}
       ]
   }
 ];

@@ -6,6 +6,7 @@ Es wird schrittweise erläutert, wie eine Component in Angular 2 funktioniert. D
 * [Schritt 2](https://github.com/ElliDy/angular2-tutorial/blob/master/AngularComponent.md#schritt-2-erzeugen-eines-todo-eintrags)
 * [Schritt 3](https://github.com/ElliDy/angular2-tutorial/blob/master/AngularComponent.md#schritt-3-löschen-eines-todo-eintrags)
 * [Schritt 4](https://github.com/ElliDy/angular2-tutorial/blob/master/AngularComponent.md#schritt-4-markieren-eines-todo-eintrags-als-erledigt)
+* [Schritt 5](https://github.com/ElliDy/angular2-tutorial/blob/master/AngularComponent.md#schritt-5-extrahieren-des-todoitems-in-eine-komponente)
 
 Um einen sinnvollen Kontext zu haben, wollen wir eine Todo-App erstellen.
 
@@ -166,4 +167,44 @@ Wir machen es uns aber einfach und verändern nur das Styling des Eintrags, wenn
 		<button (click)="deleteTodo(i)">x</button>
 	</li>
 </ul>
+```
+## Schritt 5: Extrahieren des TodoItems in eine Komponente
+
+In diesem Schritt kommen keine neuen Features hinzu. Es wird nur eine neue Komponente erstellt, die ein einzelnes Item der Liste von Todos darstellen soll.
+
+Hierzu werden outputs und inputs für diese Komponente benötigt. Als Input sind hier in der Komponente der Index des Items sowie das TodoItem selber zu verwenden. Als output wird ein Event generiert, welches der Eltern-Komponente mitteilt das ein Item mit dem bestimmten Index gelöscht werden soll. Dieses Event wird gefeuert, wenn man auf den Delete-Button drückt und bekommt den Index als Eventobjekt mit übergeben.
+
+```typescript
+@Component({
+  selector: 'todo-item',
+  styleUrls: ['./todoItem.css'],
+  templateUrl: './todoItem.html'
+})
+export class TodoItem {
+	@Input() index;
+	@Input() todo;
+	@Output() deleted = new EventEmitter();
+
+	deleteTodo(){
+		this.deleted.emit(this.index);
+	}	
+```
+
+In dem Template unserer Elternkomponente wird das TodoItem dann eingefügt. Inputs werden mit eckigen Klammern definiert und outputs mit runden Klammern.
+
+```html
+	<todo-item *ngFor="let todo of todos; let i = index" 
+		[index]="i" 
+		[todo]="todo" 
+		(deleted)="deleteTodo($event)"></todo-item>
+```
+
+Das todoItem selber erhält folgendes Template. Der Zustand der Checkbox kann jetzt ohne einen Index als einfache boolsche Variable verwendet werden, da das Item gekapselt wurde und dann jedes Item diesen Zustand besitzt.
+
+```html
+	<li>
+		<input [(ngModel)]="checked" type="checkbox"/>
+		<span [ngClass]="{checked:checked}">{{todo}}</span>
+		<button class="step3__delete-btn" (click)="deleteTodo()">x</button>
+	</li>
 ```

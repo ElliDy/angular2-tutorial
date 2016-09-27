@@ -1,0 +1,9 @@
+<h3>Todos</h3>
+<input type="text" #addInput  (keypress)="keypressed($event, addInput.value)"/>
+<button (click)="addTodo(addInput.value)">Hinzufügen</button>
+<ul>
+	<todo-item *ngFor="let todo of todos; let i = index" 
+		[index]="i" 
+		[todo]="todo" 
+		(deleted)="deleteTodo($event)"></todo-item>
+</ul>

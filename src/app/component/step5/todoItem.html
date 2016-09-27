@@ -1,0 +1,5 @@
+<li>
+	<input [(ngModel)]="checked" type="checkbox"/>
+	<span [ngClass]="{checked:checked}">{{todo}}</span>
+	<button class="step3__delete-btn" (click)="deleteTodo()">x</button>
+</li>
